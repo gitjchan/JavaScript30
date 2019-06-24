@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -24,36 +26,129 @@
       { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
       { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
       { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
-      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
+      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 },
     ];
 
-    const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
+    const people = [
+      'Beck, Glenn',
+      'Becker, Carl',
+      'Beckett, Samuel',
+      'Beddoes, Mick',
+      'Beecher, Henry',
+      'Beethoven, Ludwig',
+      'Begin, Menachem',
+      'Belloc, Hilaire',
+      'Bellow, Saul',
+      'Benchley, Robert',
+      'Benenson, Peter',
+      'Ben-Gurion, David',
+      'Benjamin, Walter',
+      'Benn, Tony',
+      'Bennington, Chester',
+      'Benson, Leana',
+      'Bent, Silas',
+      'Bentsen, Lloyd',
+      'Berger, Ric',
+      'Bergman, Ingmar',
+      'Berio, Luciano',
+      'Berle, Milton',
+      'Berlin, Irving',
+      'Berne, Eric',
+      'Bernhard, Sandra',
+      'Berra, Yogi',
+      'Berry, Halle',
+      'Berry, Wendell',
+      'Bethea, Erin',
+      'Bevan, Aneurin',
+      'Bevel, Ken',
+      'Biden, Joseph',
+      'Bierce, Ambrose',
+      'Biko, Steve',
+      'Billings, Josh',
+      'Biondo, Frank',
+      'Birrell, Augustine',
+      'Black, Elk',
+      'Blair, Robert',
+      'Blair, Tony',
+      'Blake, William',
+    ];
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const inventorsFrom1500 = function() {
+      return inventors.filter(inventor => {
+        return inventor.year > 1499 && inventor.year < 1599;
+      });
+    };
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const fullName = function() {
+      return inventors.map(inventor => {
+        return `${inventor.first} ${inventor.last}`;
+      });
+    };
+    // console.table(fullName());
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const oldToYoung = function() {
+      return inventors
+        .map(inventor => {
+          const { year } = inventor;
+          return year;
+        })
+        .sort((a, b) => a - b);
+    };
+    // console.table(oldToYoung());
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-
+    const totalYearsLived = function() {
+      return inventors.reduce((total, next) => {
+        const yearsLived = total + (next.passed - next.year);
+        return yearsLived;
+      }, 0);
+    };
+    // console.log(totalYearsLived());
     // 5. Sort the inventors by years lived
+    const sortYearsLived = function() {
+      // An object is being passed in here
+      return inventors.sort((a, b) => {
+        const currentPerson = a.passed - a.year;
+        const nextPerson = b.passed - b.year;
+        // The sort method expects 0, a negative, or postive value. That means that we can create our own condition using variables above
+        // We don't need to use .map() which means we don't map need to map anthing to a new array
+        return currentPerson > nextPerson ? -1 : 1;
+      });
+    };
+    console.table(sortYearsLived());
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const data = [
+      'car',
+      'car',
+      'truck',
+      'truck',
+      'bike',
+      'walk',
+      'car',
+      'van',
+      'bike',
+      'walk',
+      'car',
+      'van',
+      'car',
+      'truck',
+    ];
   </script>
 </body>
+
 </html>
