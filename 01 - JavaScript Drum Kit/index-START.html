@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
@@ -57,10 +59,28 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <script>
+    function removeTransition(e) {
+      if (e.propertyName !== 'transform') return; // If the propertyName != 'transform', do nothing.
+      this.classList.remove('playing');
+    }
 
-</script>
+    function playSound(event) {
+      const audio = document.querySelector(`audio[data-key="${event.keyCode}"`);
+      const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+      if (!audio) return; // If there is no data-key for key pressed, do nothing
+      audio.currentTime = 0; // This restart the sound so you can repeat press key. Comment out and test again to understand.
+      audio.play(); // Otherwise, play sound
+      key.classList.add('playing');
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+    window.addEventListener('keydown', playSound);
+  </script>
 
 
 </body>
+
 </html>
